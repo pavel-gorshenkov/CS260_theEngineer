@@ -1,0 +1,3 @@
+/workspaces/CS260_theEngineer/build/CMakeFiles/rebuild_cache.dir
+/workspaces/CS260_theEngineer/build/CMakeFiles/edit_cache.dir
+/workspaces/CS260_theEngineer/build/CMakeFiles/CS260_theEngineer.dir
