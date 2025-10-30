@@ -1,7 +1,0 @@
-Anders;Lena;L4;4
-Chen;Marcus;L6;5
-Rodriguez;Elena;L3;3
-Singh;Ravi;L5;4
-Taylor;Jordan;L2;2
-Ivanov;Nikolai;L7;5
-Brown;Amelia;L1;1

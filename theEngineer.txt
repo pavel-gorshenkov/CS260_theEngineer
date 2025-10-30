@@ -1,0 +1,8 @@
+Thompson;Alice;L1;3
+Lopez;Brian;L2;2
+Kim;Chloe;L3;4
+Singh;Derek;L4;3
+Nguyen;Ella;L5;4
+Johnson;Felix;L6;2
+Martinez;Grace;L7;1
+Patel;Hannah;L8;4

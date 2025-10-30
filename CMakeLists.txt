@@ -14,3 +14,10 @@ add_executable(CS260_theEngineer
     theEngineerList.cpp
 
 )
+
+add_custom_command(TARGET CS260_theEngineer POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/theEngineer.txt
+        $<TARGET_FILE_DIR:CS260_theEngineer>/theEngineer.txt
+    COMMENT "Copying theEngineer.txt to build directory"
+)

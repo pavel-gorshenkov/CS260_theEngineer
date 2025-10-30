@@ -10,47 +10,33 @@
 
 using namespace std;
 
-class theEngineerList {
+class theEngineerList
+{
 
-    private:
+private:
+    Node *headPtr;
+    int count;
+    Node *getNodeAt(int position) const;
+    Node *insertNode();
 
-     
-        Node* headPtr;
-        int count;
-        Node* getNodeAt(int postion) const;
-        Node* insertNode();
+    ifstream inFile;
 
-
-    public:
-
+public:
     theEngineerList();
     theEngineerList(const theEngineerList &);
-    theEngineerList& operator=(const theEngineerList&);
+    theEngineerList &operator=(const theEngineerList &);
     ~theEngineerList();
-    
-    
-    
+
+    bool loadEngineer(const char *fileName);
+    titleLevel returnEngineerTitle(const string &title);
     bool isEmpty() const;
-    bool insert(const engineer& newEngineer);
-    bool comesBefore(const engineer& a, const engineer& b) const;
+    bool insert(const engineer &newEngineer);
+    bool comesBefore(const engineer &a, const engineer &b) const;
+    bool promote(const engineer &newEngineer);
+    bool editAssessment(int index, int newAssessment);
+    bool remove();
 
-    
-    
-    void printMission();
-  
-
-
-
-
+    void printEngineer();
 };
-
-
-
-
-
-
-
-
-
 
 #endif
