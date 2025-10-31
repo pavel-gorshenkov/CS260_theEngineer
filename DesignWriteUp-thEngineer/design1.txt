@@ -1,0 +1,83 @@
+Technical Design Write-Up - theEngineerList ADT
+Pavel Gorshenkov CS-260
+
+ADT Functions:
+
+    Data management:
+        loadEngineer reads engineer data from a semicolon-delimited file
+        Parses data into lastName, firstName, titleLevel, and records the engineer count.
+        Inserts engineers sorted by last name, first name if last names are the same.
+        Loads data returning true on success, false otherwise.
+
+    Insert Function:
+        Inserts the engineer, maintaining alphabetical order
+        Handles empty list, insertion at head, and insertion in the middle/end cases
+        Returns "true" on successful insertion.
+
+    Remove:
+        Removes engineers with assessment level of '1'.
+        Use of recursive traversal to identify/delete nodes that match the condition.
+        Returns true if removed, false otherwise.
+
+    Edit Assessment
+        Updates the assessment level at the specified index.
+        Validates index exists.
+        Returns true if successful, false otherwise.
+
+    Promote
+        Increase the title of every engineer by one level.
+        If 'L8', remains the same.
+        Returns true if successful, false otherwise.
+
+Data Utilization:
+
+    Print Engineer:
+        Displays an engineer in a numbered list.
+        Format: "Index, last name, first name, title level, assessment."
+        Void function (no return)
+
+    Is empty:
+        Checks if the list has engineers
+        True if successful, false otherwise.
+
+    ReturnEngineerTitle:
+        Converts string "L1 - L8" to enum type titleLevel
+        Returns the corresponding enum value.
+
+Reporting Mechanisms:
+
+    Most functions use bool return types to indicate success/failure
+    Use of const functions to indicate that functions don't modify the list.
+    Preserving data integrity.
+
+Abstraction/Encapsulation:
+
+    Private Data Implementation:
+        Headptr to first node (private).
+        Int count (Number of engineers)(private).
+        getNodeAt - Private helper for position access.
+        The client does not manipulate nodes(private).
+        Client doesn't manipulate nodes or pointers.
+
+    Memory Management:
+        ADT handles dynamic memory allocation/deallocation.
+        Constructor initializes headPtr to nullptr.
+        Destructor traverses the list and deletes all nodes.
+        Copy constructor and assignment operator perform deep copies to guarantee 
+        data is stored.
+
+Summary:
+
+    The ADT encapsulates and sorts a linked list of engineers, maintaining 
+    abstraction. The client interacts with an interface that is both user-friendly 
+    and intuitive. Functions report success/failure with the help of Boolean returns. 
+    The program correctly handles linked list insertion and removal in all special 
+    cases(empty list, head insertion/deletion, middle insertion/deletion) with the 
+    help of meticulous pointer management and reference parameters.
+
+    Memory grows and shrinks as needed, and there is no wasted space. No need for 
+    resizing when list grows beyond capacity. The shortcoming of linked-list designs 
+    is the lack of random access and the need for data traversal to manipulate data. 
+    Nodes are scattered in heap allocation. An alternative would be to opt for 
+    array-based data management for the ease of random memory access. Array-based 
+    memory allocation is more ideal for predictable data capacity.

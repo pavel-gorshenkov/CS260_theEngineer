@@ -236,7 +236,7 @@ void theEngineerList::printEngineer()
     }
 }
 
-bool theEngineerList::promote(const engineer &newEngineer)
+bool theEngineerList::promote(const engineer &newEngineer) // Fixed promote engineer title bug
 {
     Node *curr = headPtr;
     titleLevel currLevel;
@@ -246,7 +246,7 @@ bool theEngineerList::promote(const engineer &newEngineer)
         engineer &engineerTitle = curr->getEngineer();
         titleLevel currLevel = engineerTitle.getTitle();
 
-        if (currLevel <= L8)
+        if (currLevel < L8) // ** Adjusted condition. currLevel < 8 NOT currLevel <= 8
         {
             titleLevel promoted = static_cast<titleLevel>(currLevel + 1);
             engineerTitle.setTitle(promoted);
@@ -279,7 +279,7 @@ bool theEngineerList::editAssessment(int index, int newAssessment)
 Node *theEngineerList::getNodeAt(int position) const
 {
 
-    if (position >= 1 && position - 1 <= count)
+    if (position >= 1 && position <= count)
     {
 
         Node *curr = headPtr;
@@ -289,22 +289,48 @@ Node *theEngineerList::getNodeAt(int position) const
         }
         return curr;
     }
+
+    return nullptr;
 }
 
 bool theEngineerList::remove()
 {
 
-    Node *posPtr;
-    Node *curr = nullptr;
+    return removeRecursive(headPtr, nullptr);
+}
 
-    while (posPtr != nullptr)
+bool theEngineerList::removeRecursive(Node *&curr, Node *prev) // Recursive node traversal and retrieval
+{
+    if (curr == nullptr)
     {
-        engineer &anEngineer = posPtr->getEngineer();
 
-        if (anEngineer.getAssessmentLevel() == 1)
+        return false;
+    }
+
+    engineer &anEngineer = curr->getEngineer();
+
+    if (anEngineer.getAssessmentLevel() == 1)
+
+    {
+        Node *toDelete = curr;
+        curr = curr->getNext();
+
+        if (prev != nullptr)
         {
-            curr = posPtr;
-            posPtr = posPtr->getNext();
+
+            prev->setNext(curr);
         }
+
+        delete toDelete;
+        this->count--;
+
+        return removeRecursive(curr, prev) || true;
+    }
+
+    else
+    {
+
+        Node *next = curr->getNext();
+        return removeRecursive(next, curr);
     }
 }

@@ -19,6 +19,8 @@ private:
     Node *getNodeAt(int position) const;
     Node *insertNode();
 
+    bool removeRecursive(Node *&curr, Node *prev);
+
     ifstream inFile;
 
 public:

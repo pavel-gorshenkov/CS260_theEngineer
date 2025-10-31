@@ -1,0 +1,119 @@
+Efficiency Review Write-Up - theEngineerList ADT
+Pavel Gorshenkov CS-260
+
+
+** Important to note. I found this set of commands to be most effective for reconfiguration, 	        	build script generation, and compilation. Do so from the directory where the 			implentation files are located. 
+
+-  	rm -rf build
+	mkdir build
+	cd build
+	cmake ..
+	make
+
+
+1. How well did the data structure selected perform for the assigned application?
+
+    The singly linked list data structure performed well for this engineer 
+    management application, particularly for operations that align with its 
+    strengths. The sorted insertion operation was highly efficient because 
+    maintaining alphabetical order only required pointer updates after finding 
+    the correct position. Unlike array-based structures, no element shifting 
+    was necessary.
+
+    The recursive remove operation demonstrated excellent performance when 
+    deleting multiple engineers with assessment level 1. The linked list 
+    allowed deletion during a single traversal pass without requiring memory 
+    reallocation or compacting operations that would be necessary with arrays. 
+    Each deletion was accomplished successfully, and all the necessary nodes were deleted.
+
+    The promote operation, which updates all engineer titles, performed 
+    adequately. Since every engineer needed to be 
+    visited regardless of data structure choice, the linked list traversal was 
+    reasonably efficient for this operation. The dynamic memory management was 
+    also advantageous - the list grew and shrank precisely as needed without 
+    wasted preallocated space or costly resized capacity.
+
+    However, the data structure showed significant performance limitations for 
+    the editAssessment operation. This function requires access to an engineer 
+    at a specific position, resulting in a traversal from the beginning with each edit. 
+    For an application where position-based editing is frequent, 
+    this becomes a notable bottleneck.
+
+2. Would a different data structure work better? If so, which one and why?
+
+    A dynamic array or vector-based implementation would work better if the 
+    application heavily relies on random access operations like editAssessment. 
+    Accessing the fifth engineer in an array-based implementation would be 
+    instantaneous compared to walking through five nodes in a linked 
+    list. This would dramatically improve the editAssessment performance.
+
+    Additionally, array-based structures offer superior cache locality. Modern 
+    CPUs load data in cache lines, and sequential array elements are stored 
+    contiguously in memory. This means operations like printEngineer and 
+    promote would benefit from fewer cache misses, resulting in faster 
+    real-world performance despite having the same theoretical time complexity 
+    as linked lists. The scattered heap allocation of linked list nodes often 
+    results in cache misses during traversal.
+
+    However, arrays would introduce inefficiencies for insertion operations. 
+    Maintaining sorted order would require shifting all subsequent elements 
+    after the insertion point. For frequent insertions, this could be more 
+    expensive than the linked list approach.
+
+    The optimal choice depends on usage patterns. If the application performs 
+    many insertions and deletions, the capacity is unknown, and few random accesses, 
+    the linked list is superior. If random access is frequent and the dataset 
+    size is relatively stable, an array would be more efficient. A hybrid approach using 
+    std::vector in C++ would provide automatic memory management while 
+    maintaining the cache benefits of contiguous storage.
+
+3. What was efficient about your design and use of the data structure?
+
+    The most efficient aspect of the design was leveraging recursion for the 
+    remove operation. The recursive removeRecursive function elegantly handled 
+    node deletion while maintaining list integrity through proper pointer 
+    management. By passing the current pointer by reference (Node*& curr), the 
+    function could update the head pointer when necessary, and the recursive 
+    nature naturally handled multiple consecutive deletions and node traversal 
+    without excessive loop complexity.
+
+    The sorted insertion implementation was efficient because it only traversed 
+    the list once to find the correct position and perform constant-time 
+    pointer updates. The comesBefore comparison helper function efficiently 
+    encapsulated the sorting logic, making the code maintainable and preventing duplicates 
+    logic. 
+
+    Memory management efficiency was achieved through proper encapsulation. The 
+    destructor systematically traversed and deleted all nodes, preventing 
+    memory leaks. The copy constructor and assignment operator performed deep 
+    copies, ensuring data integrity when passing lists by value or assignment. 
+    The linked list never wasted memory on unused capacity like a vector would, 
+    and never required costly memory reallocation.
+
+    The abstraction layer was highly efficient in protecting data integrity. By 
+    making headPtr, count, and getNodeAt private, the design prevented clients 
+    from corrupting the list structure or creating inconsistent states. All 
+    operations went through validated public functions that maintained the 
+    sorted order invariant and updated the count correctly. The client only interacted 
+    with implementation-specific variables necessitated by the assignment. 
+
+4. What was not efficient?
+
+    The most significant inefficiency was the lack of random access capability. 
+    The getNodeAt function required traversal for position-based access, 
+    making the assessment unnecessarily tedious. If a user wanted to edit the 
+    Assessment of the 50th engineer in a list of 100, the program would need to 
+    traverse through 49 nodes of engineers. 
+
+    Cache performance was poor due to non-contiguous memory allocation. Each 
+    node was allocated separately on the heap, potentially scattering them 
+    across memory. This meant that traversing the list likely caused frequent 
+    CPU cache misses, slowing down operations like printEngineer and promote 
+    , which must visit every node. An array would allow the CPU to prefetch 
+    upcoming data more effectively. Node pointers restricted to member functions
+    required manual deallocation, increasing volatility. 
+
+
+
+
+   

@@ -1,0 +1,27 @@
+What would you like to do? (L)ist, (A)dd, (P)romote, (E)dit, (R)emove, 
+^C==364587== 
+==364587== Process terminating with default action of signal 2 (SIGINT)
+==364587==    at 0x58AA6B5: read (in /usr/lib64/libc-2.28.so)
+==364587==    by 0x580E807: _IO_file_underflow@@GLIBC_2.2.5 (in /usr/lib64/libc-2.28.so)
+==364587==    by 0x580F965: _IO_default_uflow (in /usr/lib64/libc-2.28.so)
+==364587==    by 0x4F3FDB0: __gnu_cxx::stdio_sync_filebuf<char, std::char_traits<char> >::underflow() (in /usr/lib64/libstdc++.so.6.0.25)
+==364587==    by 0x4EFADA8: std::istream::getline(char*, long, char) (in /usr/lib64/libstdc++.so.6.0.25)
+==364587==    by 0x401384: main (main.cpp:41)
+==364587== 
+==364587== HEAP SUMMARY:
+==364587==     in use at exit: 75,394 bytes in 31 blocks
+==364587==   total heap usage: 52 allocs, 21 frees, 84,232 bytes allocated
+==364587== 
+==364587== LEAK SUMMARY:
+==364587==    definitely lost: 0 bytes in 0 blocks
+==364587==    indirectly lost: 0 bytes in 0 blocks
+==364587==      possibly lost: 0 bytes in 0 blocks
+==364587==    still reachable: 75,394 bytes in 31 blocks
+==364587==         suppressed: 0 bytes in 0 blocks
+==364587== Reachable blocks (those to which a pointer was found) are not shown.
+==364587== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==364587== 
+==364587== For lists of detected and suppressed errors, rerun with: -s
+==364587== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+pavel.gorshenkov@vmcslinuxprod01:~/CS161B/cs260/projects $ 

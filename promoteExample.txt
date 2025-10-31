@@ -1,0 +1,25 @@
+Fill in the empty fields mentioned below, when you have entered all the fields, select Q)uit
+What would you like to do? (L)ist, (A)dd, (P)romote, (E)dit, (R)emove, 
+L
+1) Johnson Felix L6 2
+2) Kim Chloe L3 4
+3) Lopez Brian L2 2
+4) Martinez Grace L7 1
+5) Nguyen Ella L5 4
+6) Patel Hannah L8 4
+7) Singh Derek L4 3
+8) Thompson Alice L1 3
+What would you like to do? (L)ist, (A)dd, (P)romote, (E)dit, (R)emove, 
+P
+You selected promote
+What would you like to do? (L)ist, (A)dd, (P)romote, (E)dit, (R)emove, 
+L
+1) Johnson Felix L7 2
+2) Kim Chloe L4 4
+3) Lopez Brian L3 2
+4) Martinez Grace L8 1
+5) Nguyen Ella L6 4
+6) Patel Hannah Unknown 4
+7) Singh Derek L5 3
+8) Thompson Alice L2 3
+What would you like to do? (L)ist, (A)dd, (P)romote, (E)dit, (R)emove, 
